@@ -34,30 +34,29 @@ public: // <-- Constructor must be public so main.cpp can use it!
         this->tokens = tokens;
     }
 
-    // --- 1. FIXED PARSER HELPERS ---
-
-    // The parser checks the tokens.size(), not source.length()
+    
+    
     bool isAtEnd() {
         return current >= tokens.size() || tokens.at(current).type == END_OF_FILE;
     }
 
-    // Returns a Token, not a char
+    
     Token peek() {
         if (isAtEnd()) return Token(END_OF_FILE, "", std::any{}, 0);
         return tokens.at(current);
     }
 
-    // Returns a Token, not a char
+    
     Token advance() {
         if (!isAtEnd()) current++;
         return tokens.at(current - 1);
     }
 
-    // match() now takes a TokenType (like PIPE), not a char (like '|')
+    
     bool match(TokenType expected) {
         if (isAtEnd()) return false;
         
-        // We check the .type property of the token
+        
         if (peek().type != expected) return false;
 
         current++;
@@ -67,17 +66,15 @@ public: // <-- Constructor must be public so main.cpp can use it!
     void foo(){
 	    std::cout<<"foo\n";
     }
-    // --- 2. YOUR LOGIC PLAYGROUND ---
+   
 
     // The parser filters the Tokens into either Command, or Pipeline.
-    // I have set up the instances you need here. Try to build your loop!
-	Pipeline parseExample() {
+   	Pipeline parseExample() {
 		Pipeline pipeline;
-		Command currentCommand; // Instance of the struct!
-
+		Command currentCommand; 
 		while (!isAtEnd()) {
-		// Your logic goes here! 
-		// Hint: use advance(), match(PIPE), and currentCommand.args.push_back(...)
+		 
+		
 			if (match(WORD) || match(STRING)) {
 				currentCommand.args.push_back(tokens[current].lexeme);
 			}
