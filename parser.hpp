@@ -29,7 +29,7 @@ class Parser final {
                 std::vector<Token> tokens;
                 int current = 0;
 
-        public: // <-- Constructor must be public so main.cpp can use it!
+        public:
                 Parser(std::vector<Token> tokens) {
                         this->tokens = tokens;
                 }
