@@ -21,12 +21,3 @@ struct Command{
 struct Pipeline{
 	std::vector<Command> commands;
 };
-
-//may not be needed
-
-//struct Sequence{
-//	enum class Op { NONE, AND, OR, SEMI };
-//	Op op = Op::NONE;
-//	std::shared_ptr<Sequence> left;
-//	std::shared_ptr<Pipeline> Pipeline;
-//};
