@@ -8,7 +8,7 @@
 #include <vector>
 //no clue what i'm doing, just know i need structs and something else.
 #include <fstream>
-
+#include <iostream>
 
 //TODO change all the else if s to a switch
 
