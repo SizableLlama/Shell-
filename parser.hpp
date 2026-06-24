@@ -81,9 +81,15 @@ class Parser final {
 					continue;
                                 }
                                 else if(match(PIPE)) {
-                                        pipeline.commands.push_back(currentCommand);
-					currentCommand = Command();
-					continue;
+                                        if (!match(END_OF_FILE)) {
+						pipeline.commands.push_back(currentCommand);
+						currentCommand = Command();
+						continue;
+					}
+					else {
+						std::cerr<<"Expected expression following '|'\n";
+						continue;
+					}
                                 }
                                 else if (match(RIGHT)) {
                                         currentCommand.redir_type = RedirType::OUTPUT;
@@ -95,8 +101,13 @@ class Parser final {
                                                 currentCommand.redir_file = tokens[current - 1].lexeme;
 						continue;
                                         }
+					else if (match(END_OF_FILE)) {
+						std::cerr<<"Expected expression following '>'\n";
+						continue;
+					}
                                         else{
                                                 std::cerr<<"Expected file name following '>'\n";
+						continue;
                                         }
                                 }
                                 else if (match(LEFT)) {
@@ -107,6 +118,9 @@ class Parser final {
 						currentCommand.args.push_back(tokens[current - 1].lexeme);
 						continue;
 					}
+					else if (match(END_OF_FILE)) {
+						std::cerr<<"Expected expression following '<'\n";
+					}
 					else {
 						std::cerr<<"Expected file name following '<'\n";
 					}
@@ -116,8 +130,10 @@ class Parser final {
 					//command like : command >> output_file
 					if (match(WORD) || match(STRING)) {
 						currentCommand.redir_file = tokens[current - 1].lexeme;
-						currentCommand.args.push_back(tokens[current - 1].lexeme);	
 						continue;
+					}
+					else if (match(END_OF_FILE)) {
+						std::cerr<<"Expected expression following '>>'\n";
 					}
 					else{
 						std::cerr<<"Expected file name following '>>'\n";
@@ -135,14 +151,24 @@ class Parser final {
 					continue;
                                 }
                                 else if (match(AND_AND)) {
-                                        pipeline.commands.push_back(currentCommand);
-					currentCommand = Command();
-					continue;
+                                        if (!match(END_OF_FILE)) {
+						pipeline.commands.push_back(currentCommand);
+						currentCommand = Command();
+						continue;
+					}
+					else {
+						std::cerr<<"Expected expression following '&&'\n";
+					}
                                 }
                                 else if (match(OR_OR)) {
-                                        pipeline.commands.push_back(currentCommand);
-					currentCommand = Command();
-					continue;
+					if (!match(END_OF_FILE)) {
+                                        	pipeline.commands.push_back(currentCommand);
+						currentCommand = Command();
+						continue;
+					}
+					else {
+						std::cerr<<"Expected expression following '||'\n";
+					}
                                 }
                                 //else {
                                 //        pipeline.commands.push_back(currentCommand);
