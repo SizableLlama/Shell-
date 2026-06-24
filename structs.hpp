@@ -5,19 +5,25 @@
 #include <memory>
 
 enum class RedirType {
-	NONE,   // NOTHING
-	INPUT,	// <
-	OUTPUT,	// >
-	APPEND	// >>
+		NONE,   // NOTHING
+		INPUT,	// <
+		OUTPUT,	// >
+		APPEND	// >>
 };
 
-struct Command{
-	std::vector<std::string> args;
-	RedirType redir_type = RedirType::NONE;
-	std::string redir_file;
-	bool background = false;
+struct Command {
+		std::vector<std::string> args;
+		RedirType redir_type = RedirType::NONE;
+		std::string redir_file;
+		bool background = false;
 };
 
-struct Pipeline{
-	std::vector<Command> commands;
+struct Pipeline {
+		std::vector<Command> commands;
+};
+struct Sequence {
+        enum class Op { NONE, AND, OR, SEMI };
+        Op op = Op::NONE;
+        std::shared_ptr<Sequence> left;
+		std::shared_ptr<Pipeline> Pipeline;
 };
