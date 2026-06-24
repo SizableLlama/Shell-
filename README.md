@@ -8,7 +8,5 @@ If anyone were to read my code thus far, they will notice it has little to no co
 I know. I will probably fix that after the thing is built.
 
 Something else is the commented out code that i'm not using. i will remove that once i know it isn't needed.
-another thing is the using namespace std; i will remove that too, i just forgot.
-last thing is that there are some performance errors, like not using const references, really ever. i will fix this too.
 
-the executor is named executioner because thats cooler. 
+the shell sort of works now, it just needs a main file, and the executioner class needs a few small improvements.
