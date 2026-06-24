@@ -1,6 +1,6 @@
-# Shell-
+# Bell
 A basic shell
-To add context, i have been creating this for an application for an apprenticeship.
+The shell has been renamed to 'Bell' as it is a shell, and my name is Bill.
 
 As the zero readers of my code may notice, I adapted the CPPlox Lexer for the shell.
 And so the next thing would be the executor.
