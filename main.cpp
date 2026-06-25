@@ -14,7 +14,7 @@ int main() {
 	Executioner executor;
 
 	while (true) {
-		std::cout<<std::filesystem::current_path()<< "Bell >";
+		std::cout<<'['<<std::filesystem::current_path()<<']'<< "Bell >";
 		if (!std::getline(std::cin, input)) {
 			std::cout<<"\nExiting shell...\n";
 			break;
