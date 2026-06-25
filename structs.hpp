@@ -21,9 +21,13 @@ struct Command {
 struct Pipeline {
 		std::vector<Command> commands;
 };
+/*
 struct Sequence {
         enum class Op { NONE, AND, OR, SEMI };
         Op op = Op::NONE;
         std::shared_ptr<Sequence> left;
 		std::shared_ptr<Pipeline> Pipeline;
 };
+This struct was needed for the logical opperators. I cannot yet implement them.
+they are too complex for I.
+*/
