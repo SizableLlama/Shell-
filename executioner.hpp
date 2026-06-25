@@ -10,10 +10,7 @@
 #include <sys/wait.h>
 #include <fstream>
 #include <fcntl.h>
-//std::vector<std::string> into a std::vector<char*>
 
-
-// this should all be in a class executioner.
 
 class Executioner {
 private:
@@ -67,37 +64,14 @@ private:
 			int file_desc = open(command.redir_file.c_str(), O_CREAT | O_RDWR);
 		}
 	}
-
-
-
-
-
-
-
-
-
 /*
- TODO: empty string, eg "hi  with no closing indicator results in a crash.
-
- TODO: benchmark
-
- TODO: figure out the wait function
-
  TODO stop ctrl + c
  
  TODO make a nice main
- 
- TODO: fix the double output
-
- TODO add functionality to &&, ||, |, >, <, >>
-
- TODO stop crashes. This is caused by the above tokens and insufficient commands following them.
 */
-
 public:
 	Executioner() = default;
 	void run(const Pipeline& pipeline) {
-		//TODO make this elif chain a switch. Also, check for built ins before commandToArgv.
 		const Command& com = pipeline.commands[0];
 		
 		std::vector<char*> argv = commandToArgv(com);
@@ -116,35 +90,5 @@ public:
 		else {
 			waitpid(status, nullptr, 0);
 		}
-
-		
-
-
-
-
-
-		/*
-		ls -la | grep ".cpp" > output.txt
-		turns into:
-		ls -la   and   grep ".cpp"
-		
-		need the && and || logic. if both left and right are true, run.
-		if left is false but right is true, run.
-		
-		but how? There must be two arguments. The OS probably checks for us, then I can do accordingly.
-		*/
-
-
-
-
-
-
-
-
-
 	}
 };
-//So, i need to build arguments using the commands vector.
-//i then loop that to execvp.
-//open() is then used to open a file which is also in the commands vector.
-//open() is then used to open a file which is also in the commands vector.
