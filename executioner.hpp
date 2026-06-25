@@ -82,6 +82,7 @@ public:
 		status = fork();		
 
 		if (status == 0) {
+			signal(SIGINT, SIG_DFL);
 			execvp(argv[0], argv.data());			
 		}
 		else if (status == -1) {
